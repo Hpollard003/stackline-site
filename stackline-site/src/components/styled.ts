@@ -24,6 +24,25 @@ export const Container = styled("div")`
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 `;
 
+export const ProductPageContainer = styled("div")`
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+`;
+
+export const SelectProductPage = styled("div")`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  width: 30%;
+`;
+
 export const Title = styled("h3")`
   margin: -12px;
   font-weight: bold;
@@ -72,4 +91,10 @@ export const TableContainer = styled("div")`
   height: 50%;
   background: white;
   margin: 0 14px;
+`;
+
+export const CloseProductButton = styled("button")`
+  align-self: end;
+  background: transparent;
+  border: 1px solid #364957;
 `;

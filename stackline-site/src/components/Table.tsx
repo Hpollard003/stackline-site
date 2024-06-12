@@ -1,21 +1,21 @@
 import React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { jsonResponse, stacklineResT } from "../constants";
+import { stacklineResT } from "../constants";
 import { format } from "date-fns";
 import { TableContainer, TableHeader } from "./styled";
 
 const columns: GridColDef[] = [
   {
     field: "weekEnding",
-    renderHeader: () => (<TableHeader>WEEK ENDING</TableHeader>),
+    renderHeader: () => <TableHeader>WEEK ENDING</TableHeader>,
+    width: 180,
     renderCell: (params) => (
       <div>{format(params.row.weekEnding, "MM-dd-yy") || ""}</div>
     ),
-    width: 180,
   },
   {
     field: "retailSales",
-    renderHeader: () => (<TableHeader>RETAIL SALES</TableHeader>),
+    renderHeader: () => <TableHeader>RETAIL SALES</TableHeader>,
     type: "number",
     width: 180,
     renderCell: (params) => (
@@ -29,7 +29,7 @@ const columns: GridColDef[] = [
   },
   {
     field: "wholesaleSales",
-    renderHeader: () => (<TableHeader>WHOLESALE SALES</TableHeader>),
+    renderHeader: () => <TableHeader>WHOLESALE SALES</TableHeader>,
     type: "number",
     width: 180,
     renderCell: (params) => (
@@ -43,13 +43,13 @@ const columns: GridColDef[] = [
   },
   {
     field: "unitsSold",
-    renderHeader: () => (<TableHeader>UNITS SOLD</TableHeader>),
+    renderHeader: () => <TableHeader>UNITS SOLD</TableHeader>,
     type: "number",
     width: 180,
   },
   {
     field: "retailerMargin",
-    renderHeader: () => (<TableHeader>RETAILER MARGIN</TableHeader>),
+    renderHeader: () => <TableHeader>RETAILER MARGIN</TableHeader>,
     type: "number",
     width: 180,
     renderCell: (params) => (
@@ -63,9 +63,11 @@ const columns: GridColDef[] = [
   },
 ];
 
-const rows: stacklineResT["sales"] = jsonResponse[0].sales || [];
-
-export const Table = () => {
+interface Props {
+  productData: stacklineResT;
+}
+export const Table = ({ productData }: Props) => {
+  const rows: stacklineResT["sales"] = productData.sales || [];
   return (
     <TableContainer>
       <DataGrid
@@ -77,7 +79,7 @@ export const Table = () => {
             paginationModel: { page: 0, pageSize: 6 },
           },
         }}
-        style={{color: '#979fa7'}}
+        style={{ color: "#979fa7" }}
         pageSizeOptions={[6, 12]}
       />
     </TableContainer>

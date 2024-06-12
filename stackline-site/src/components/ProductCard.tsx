@@ -1,6 +1,7 @@
-import React from "react";
-import { jsonResponse } from "../constants";
+import React, { Dispatch, SetStateAction } from "react";
+import { stacklineResT } from "../constants";
 import {
+  CloseProductButton,
   Container,
   ProductImg,
   Subtitle,
@@ -9,13 +10,20 @@ import {
   Title,
 } from "./styled";
 
-export const ProductCard = () => {
-  const json = jsonResponse;
+interface Props {
+  productData: stacklineResT;
+  setProductData: Dispatch<SetStateAction<stacklineResT | undefined>>;
+}
+
+export const ProductCard = ({ productData, setProductData }: Props) => {
   return (
     <Container>
-      <ProductImg src={json[0].image} />
-      <Title>{json[0].title}</Title>
-      <Subtitle>{json[0].subtitle}</Subtitle>
+      <CloseProductButton onClick={() => setProductData(undefined)}>
+        x
+      </CloseProductButton>
+      <ProductImg src={productData.image} />
+      <Title>{productData.title}</Title>
+      <Subtitle>{productData.subtitle}</Subtitle>
       <div
         style={{
           borderTop: "1px solid #b3b5bd",
@@ -23,7 +31,7 @@ export const ProductCard = () => {
         }}
       />
       <TagsContainer>
-        {json[0].tags.map((tag, index) => (
+        {productData.tags.map((tag, index) => (
           <Tags key={index}>{tag}</Tags>
         ))}
       </TagsContainer>
