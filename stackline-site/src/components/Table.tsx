@@ -2,11 +2,12 @@ import React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { jsonResponse, stacklineResT } from "../constants";
 import { format } from "date-fns";
+import { TableContainer, TableHeader } from "./styled";
 
 const columns: GridColDef[] = [
   {
     field: "weekEnding",
-    headerName: "WEEK ENDING",
+    renderHeader: () => (<TableHeader>WEEK ENDING</TableHeader>),
     renderCell: (params) => (
       <div>{format(params.row.weekEnding, "MM-dd-yy") || ""}</div>
     ),
@@ -14,7 +15,7 @@ const columns: GridColDef[] = [
   },
   {
     field: "retailSales",
-    headerName: "RETAIL SALES",
+    renderHeader: () => (<TableHeader>RETAIL SALES</TableHeader>),
     type: "number",
     width: 180,
     renderCell: (params) => (
@@ -28,7 +29,7 @@ const columns: GridColDef[] = [
   },
   {
     field: "wholesaleSales",
-    headerName: "WHOLESALE SALES",
+    renderHeader: () => (<TableHeader>WHOLESALE SALES</TableHeader>),
     type: "number",
     width: 180,
     renderCell: (params) => (
@@ -42,13 +43,13 @@ const columns: GridColDef[] = [
   },
   {
     field: "unitsSold",
-    headerName: "UNITS SOLD",
+    renderHeader: () => (<TableHeader>UNITS SOLD</TableHeader>),
     type: "number",
     width: 180,
   },
   {
     field: "retailerMargin",
-    headerName: "RETAILER MARGIN",
+    renderHeader: () => (<TableHeader>RETAILER MARGIN</TableHeader>),
     type: "number",
     width: 180,
     renderCell: (params) => (
@@ -66,13 +67,7 @@ const rows: stacklineResT["sales"] = jsonResponse[0].sales || [];
 
 export const Table = () => {
   return (
-    <div
-      style={{
-        width: "100%",
-        background: "white",
-        margin: "0 14px",
-      }}
-    >
+    <TableContainer>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -82,8 +77,9 @@ export const Table = () => {
             paginationModel: { page: 0, pageSize: 6 },
           },
         }}
+        style={{color: '#979fa7'}}
         pageSizeOptions={[6, 12]}
       />
-    </div>
+    </TableContainer>
   );
 };
